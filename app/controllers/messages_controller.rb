@@ -89,6 +89,7 @@ class MessagesController < ApplicationController
     @message.create_users!
     @message.send!
     
+    flash[:notice] = "Successfully sent a bunch of emails"
     # Just send somewhere for now
     redirect_to '/messages'
   end
