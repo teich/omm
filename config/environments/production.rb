@@ -1,3 +1,10 @@
+class BadAuthentication < Sinatra::Application
+  get '/unauthenticated' do
+    status 403
+    haml "%h3= 'Unable to authenticate, sorry bud.'"
+  end
+end
+
 Mailer::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
@@ -29,7 +36,7 @@ Mailer::Application.configure do
 
   # Disable Rails's static asset server
   # In production, Apache or nginx will already do this
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
@@ -43,6 +50,12 @@ Mailer::Application.configure do
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
   config.i18n.fallbacks = true
+  
+  config.middleware.use Warden::Manager do |manager|
+    manager.default_strategies :google_apps
+    manager.failure_app = BadAuthentication
+    manager[:google_apps_domain]   = 'heroku.com'
+  end
   
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
