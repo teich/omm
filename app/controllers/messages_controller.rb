@@ -82,4 +82,14 @@ class MessagesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def deliver
+    @message = Message.find(params[:id])
+
+    @message.create_users!
+    @message.send!
+    
+    # Just send somewhere for now
+    redirect_to '/messages'
+  end
 end

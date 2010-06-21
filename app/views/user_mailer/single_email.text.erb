@@ -1,1 +1,1 @@
-<%= @message.template %>
+<%= ERB.new(@message.template).result(binding) %>

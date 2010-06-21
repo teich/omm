@@ -5,7 +5,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     @fields = fields
     @message = message
-    mail(:to => "oren@heroku.com", #user.email,
+    mail(:to => user.email,
          :subject => message.subject)
   end
 end

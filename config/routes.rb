@@ -1,6 +1,8 @@
 Mailer::Application.routes.draw do |map|
   resources :messages
-  resources :sent_messages
+  match 'messages/:id/deliver' => 'messages#deliver', :as => :deliver
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
