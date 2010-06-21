@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  to_csv: MyText
+  template: MyText
+  subject: MyText
+
+two:
+  to_csv: MyText
+  template: MyText
+  subject: MyText
