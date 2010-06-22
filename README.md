@@ -12,3 +12,8 @@ Recipient list format is:
 It parses on tabs, and creates an array of @fields[] of all the fields you've got.
 
 Template is ERB format
+
+Google Apps auth
+===============
+
+We use google apps as our main SSO.  My weak skills meant I couldn't get my usual http://github.com/tobi/google_apps_login working, so I went with http://github.com/atmos/warden-googleapps instead.  Warden works amazingly well.  I couldn't figure out how to pass a valid faliure app, so I did nasty hacky things. 
