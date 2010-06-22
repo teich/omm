@@ -6,10 +6,13 @@ class ApplicationController < ActionController::Base
   
   
   def ensure_authenticated
-    unless env['warden'].authenticate!
-      throw(:warden)
+    if RAILS_ENV == "production"
+      unless env['warden'].authenticate!
+        throw(:warden)
+      end
     end
   end
+  
 
   def user
     env['warden'].user
