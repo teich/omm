@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default :from => "oren@heroku.com"
+  default :from => "oren@heroku.com", :bcc => "crm@heroku.com"
   
   def single_email(user, fields, message)
     @user = user
