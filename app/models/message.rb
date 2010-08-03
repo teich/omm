@@ -7,8 +7,7 @@ class Message < ActiveRecord::Base
     self.to_csv.split(/\n/).each do |line|
       user = User.find_by_email(line.split(/\t/)[0])
       fields = line.strip.split(/\t/)[1..-1]
-      UserMailer.single_email(user, fields, self).deliver
-      SentMessage.create(:user => user, :message => self)
+      self.send_message(user, fields)
     end
   end
   
@@ -20,4 +19,18 @@ class Message < ActiveRecord::Base
       end
     end
   end
+  
+  def blast!
+    self.create_users!
+    self.send!
+  end
+
+
+  def send_message(user,fields)
+    UserMailer.single_email(user, fields, self).deliver
+    SentMessage.create(:user => user, :message => self)
+  end
+
+  handle_asynchronously :blast!  
+  handle_asynchronously :send_message
 end

@@ -8,3 +8,5 @@ gem 'sinatra'
 gem 'sqlite3-ruby', :require => 'sqlite3', :group => :development
 
 gem 'warden-googleapps'
+
+gem 'delayed_job'
